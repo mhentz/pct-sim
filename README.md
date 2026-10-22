@@ -2,6 +2,8 @@
 
 This Geant4 application models a proton computed tomography (pCT) acquisition process.
 
+See the [pct-tools](https://github.com/mhentz/pct-tools) package for a Python library you can use in your reconstructions of the simulated data.
+
 The transport of protons through a chosen CT phantom is simulated. Individual protons' position, direction of travel, and energy are recorded from detector regions placed in front and behind the phantom (from the beam nozzle perspective). A full acquisition is obtained by rotating the phantom through a set of projection angles, with one Geant4 run per projection.
 
 ![Geant4 visualisation of the single-tracking set-up with the CTP528 phantom in the realistic configuration](docs/figures/setup_ctp528_realistic.png)
