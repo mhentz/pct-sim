@@ -4,6 +4,10 @@ This Geant4 application models a proton computed tomography (pCT) acquisition pr
 
 The transport of protons through a chosen CT phantom is simulated. Individual protons' position, direction of travel, and energy are recorded from detector regions placed in front and behind the phantom (from the beam nozzle perspective). A full acquisition is obtained by rotating the phantom through a set of projection angles, with one Geant4 run per projection.
 
+![Geant4 visualisation of the single-tracking set-up with the CTP528 phantom in the realistic configuration](docs/figures/setup_ctp528_realistic.png)
+
+Visualisation of the single-tracking set-up with the CTP528 module of the Catphan phantom in the realistic configuration. The red lines are the trajectories of 120 protons at 200 MeV and the blue panes are the entry and exit tracking detectors; the aluminium line-pair inserts are visible at the centre of the water cylinder.
+
 Several phantoms are available (`ctp528`, `gammex`, `spiral`, and `water`, among others), each of which may be simulated with an "ideal" or a "realistic" detector setup. The two setups differ in the detector dimensions and distance from the phantom (10 mm versus 150 mm) and in the beam source definition; see the macros under `source/macros/`.
 
 These measurements provide a dataset that can later be used to generate pCT image reconstructions. For each projection they are written to a ROOT file containing two ntuples, `In` and `Out`, which hold the kinetic energy, lateral position, direction cosines, and event and run IDs of every primary proton crossing the entry and exit detectors respectively (only protons that reach both detectors are stored). Dose and fluence scored in the phantom region are dumped alongside. Scripts for submitting the projections of an acquisition as batch jobs on a Sun Grid Engine cluster are provided under `source/scripts/`.
