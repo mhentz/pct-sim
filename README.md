@@ -1,4 +1,4 @@
-# Geant4 proton CT simulation
+# protonct-sim — Geant4 proton CT simulations
 
 This Geant4 application models a proton computed tomography (pCT) acquisition process.
 
@@ -14,7 +14,7 @@ These measurements provide a dataset that can later be used to generate pCT imag
 
 ## Building the simulation
 
-The current version requires Geant4 11.0 or later (multi-threading is recommended) and CMake 3.16 or higher. The simulation is built as follows:
+The current version requires [Geant4](https://github.com/Geant4/geant4) 11.0 or later (multi-threading is recommended) and CMake 3.16 or higher; see the [Geant4 installation guide](https://geant4-userdoc.web.cern.ch/UsersGuides/InstallationGuide/html/index.html) for setting it up. The simulation is built as follows:
 
 ```
 $ git clone https://github.com/mhentz/protonct-sim.git
