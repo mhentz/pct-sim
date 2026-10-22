@@ -1,0 +1,55 @@
+# SPDX-License-Identifier: BSD-3-Clause
+# Copyright (c) 2026 Matthieu Hentz
+
+# Macro for debugging in interactive mode, with UI anv VIS
+
+/control/verbose 2
+/run/verbose 2
+
+# /control/alias phantom ctp528
+# /control/alias phantom gammex
+# /control/alias phantom spiral
+
+# /control/alias phantom water
+/control/alias phantom water-large
+
+# /control/alias setup ideal
+/control/alias setup realistic
+
+# Pick a phantom
+/phantom/type {phantom}
+/phantom/setup {setup}
+
+/control/strdoif {setup} == ideal /user/det/size 400. 400. 0.1 mm
+/control/strdoif {setup} == realistic /user/det/size 400. 100. 0.1 mm
+
+/run/numberOfThreads 8
+/run/initialize
+
+/control/macroPath macros/debug
+
+# /control/strdoif {phantom} != gammex /control/execute init_scoring.mac
+# /control/strdoif {phantom} == gammex /control/execute init_scoring_gammex.mac
+
+# /control/strdoif {phantom} != gammex /control/execute gps_{setup}.mac
+# /control/strdoif {phantom} == gammex /control/execute gps_gammex_{setup}.mac
+
+/control/execute init_scoring_gammex.mac
+/control/execute gps_gammex_{setup}.mac
+
+#/process/inactivate msc
+
+#/user/run/initialID 10
+
+#/user/stepMax 0.1 mm
+/user/event/printModulo 1000
+
+/control/execute vis.mac
+
+/control/loop run_projection.mac angle 0 0 1
+
+# /score/drawProjection fluenceBoxIn fluenceIn
+# /score/drawProjection fluenceBoxCentre fluenceCentre
+# /score/drawProjection fluenceBoxOut fluenceOut
+
+# /vis/viewer/flush

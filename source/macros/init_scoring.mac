@@ -1,0 +1,40 @@
+# SPDX-License-Identifier: BSD-3-Clause
+# Copyright (c) 2026 Matthieu Hentz
+
+/score/create/cylinderMesh sliceMesh
+# DON'T FORGET THESE ARE HALF-WIDTHS
+/score/mesh/cylinderSize 100 1.5 mm
+/score/mesh/nBin 1 1 1
+/score/mesh/rotate/rotateX 90 deg
+/score/quantity/doseDeposit sliceDose
+/score/filter/particle sliceDose proton
+/score/quantity/energyDeposit sliceEnergy
+/score/filter/particle sliceEnergy proton
+/score/close
+
+/score/create/boxMesh fluenceBoxIn
+# DON'T FORGET THESE ARE HALF-WIDTHS
+/score/mesh/boxSize 100 1.5 1 mm
+/score/mesh/translate/xyz 0. 0. -109 mm
+/score/mesh/nBin 1 1 1
+/score/quantity/flatSurfaceCurrent fluenceIn 1 false true
+/score/filter/particle protonFilter2 proton
+/score/close
+
+/score/create/boxMesh fluenceBoxCentre
+# DON'T FORGET THESE ARE HALF-WIDTHS
+/score/mesh/boxSize 100 1.5 1 mm
+/score/mesh/translate/xyz 0. 0. 1 mm
+/score/mesh/nBin 1 1 1
+/score/quantity/flatSurfaceCurrent fluenceCentre 1 false true
+/score/filter/particle protonFilter3 proton
+/score/close
+
+/score/create/boxMesh fluenceBoxOut
+# DON'T FORGET THESE ARE HALF-WIDTHS
+/score/mesh/boxSize 100 1.5 1 mm
+/score/mesh/translate/xyz 0. 0. 111 mm
+/score/mesh/nBin 1 1 1
+/score/quantity/flatSurfaceCurrent fluenceOut 1 false true
+/score/filter/particle protonFilter4 proton
+/score/close

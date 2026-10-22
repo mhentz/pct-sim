@@ -1,0 +1,40 @@
+# SPDX-License-Identifier: BSD-3-Clause
+# Copyright (c) 2026 Matthieu Hentz
+
+# Macro template used by batch submission script
+# Set some default verbose
+/control/verbose 2
+/run/verbose 2
+
+# Set aliases
+/control/alias phantom ${PHANTOM}
+/control/alias setup ${SETUP}
+/control/alias chunk ${CHUNK}
+
+# Setup
+/phantom/type {phantom}
+/phantom/setup {setup}
+
+/control/strdoif {setup} == ideal /user/det/size 400. 400. 0.001 mm
+/control/strdoif {setup} == realistic /user/det/size 400. 100. 0.001 mm
+
+# Run
+/run/numberOfThreads 8
+/run/initialize
+
+/control/macroPath macros
+
+/control/strif {phantom} != gammex init_scoring.mac
+/control/strif {phantom} != gammex gps_{setup}.mac
+
+/control/strif {phantom} == gammex init_scoring_gammex.mac
+/control/strif {phantom} == gammex gps_gammex_{setup}.mac
+
+/user/event/printModulo 20000
+
+/control/multiply run_id ${START} 2
+/user/run/setInitialRunID {run_id}
+
+/control/add stop_angle ${STOP} 0.5
+/control/alias angular_step_size ${STEP_SIZE}
+/control/loop run_split_projection.mac angle ${START} {stop_angle} {angular_step_size}

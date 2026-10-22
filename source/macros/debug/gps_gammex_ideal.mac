@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: BSD-3-Clause
+# Copyright (c) 2026 Matthieu Hentz
+
+# Macro for general particle source settings
+
+/gps/particle proton
+/gps/number 1  # per event
+
+# Energy
+/gps/ene/type   Mono
+/gps/ene/mono   250 MeV
+
+# Source
+/gps/position  0 0 -185 mm
+/gps/direction 0 0 1
+
+# Create parallel beam
+/gps/pos/type  Plane
+/gps/pos/shape Rectangle
+/gps/pos/halfx 175 mm
+/gps/pos/halfy 1.5 mm

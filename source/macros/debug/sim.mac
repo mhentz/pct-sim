@@ -1,0 +1,55 @@
+# SPDX-License-Identifier: BSD-3-Clause
+# Copyright (c) 2026 Matthieu Hentz
+
+/control/verbose 0
+/run/verbose 0
+/event/verbose 0
+/tracking/verbose 0
+
+# /control/alias phantom ctp528
+# /control/alias phantom gammex
+# /control/alias phantom spiral
+# /control/alias phantom water
+# /control/alias phantom water-large
+# /control/alias phantom spiral-small
+# /control/alias phantom toy
+
+# /control/alias setup ideal
+# /control/alias setup realistic
+
+# Pick phantom
+/phantom/type {phantom}
+/phantom/setup {setup}
+
+/control/strdoif {setup} == ideal /user/det/size 400. 400. 0.1 mm
+/control/strdoif {setup} == realistic /user/det/size 400. 100. 0.1 mm
+
+# Run
+/run/numberOfThreads 8
+/run/initialize
+
+/random/setSavingFlag true
+
+# Set macro path
+/control/macroPath macros/debug
+
+/control/strif {phantom} != gammex init_scoring.mac
+/control/strif {phantom} != gammex gps_{setup}.mac
+
+/control/strif {phantom} == gammex init_scoring_gammex.mac
+/control/strif {phantom} == gammex gps_gammex_{setup}.mac
+
+# /control/strif {phantom} == water-large init_scoring_gammex.mac
+# /control/strif {phantom} == water-large gps_gammex_{setup}.mac
+
+#/process/inactivate msc
+
+#/user/stepMax 0.1 mm
+/user/event/printModulo 1000
+
+# /control/loop run_projection.mac angle 0 10 0.5
+/control/loop run_projection.mac angle 0 0 1
+
+# /score/drawProjection fluenceBoxIn fluenceIn
+# /score/drawProjection fluenceBoxCentre fluenceCentre
+# /score/drawProjection fluenceBoxOut fluenceOut

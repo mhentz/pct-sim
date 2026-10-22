@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: BSD-3-Clause
+# Copyright (c) 2026 Matthieu Hentz
+
+# Dump scores defined in the macro init_scoring.mac or init_scoring_gammex.mac depending
+# on the phantom used.
+/control/alias outdir data/{phantom}-{setup}/scoring
+
+/control/shell mkdir -p {outdir}
+/score/dumpQuantityToFile sliceMesh sliceDose {outdir}/sliceDose{angle}.csv
+/score/dumpQuantityToFile sliceMesh sliceEnergy {outdir}/sliceEnergy{angle}.csv
+/score/dumpQuantityToFile fluenceBoxIn fluenceIn {outdir}/fluenceIn{angle}.csv
+/score/dumpQuantityToFile fluenceBoxCentre fluenceCentre {outdir}/fluenceCentre{angle}.csv
+/score/dumpQuantityToFile fluenceBoxOut fluenceOut {outdir}/fluenceOut{angle}.csv

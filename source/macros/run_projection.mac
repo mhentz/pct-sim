@@ -1,0 +1,33 @@
+# SPDX-License-Identifier: BSD-3-Clause
+# Copyright (c) 2026 Matthieu Hentz
+
+# Macro that rotates phantom by {angle} and runs the simulation
+# {angle} is set by a loop counter in macros/sim_template.mac
+
+/phantom/rotate {angle} deg
+/phantom/update
+
+# Seeds are read as integers, so use twice the angle to give 0.5 deg steps distinct seeds
+/control/multiply seed1 {angle} 2
+/control/add seed2 {seed1} 1000
+/random/setSeeds {seed1} {seed2}
+
+/control/shell mkdir -p data/{phantom}-{setup}/PhaseSpace
+/analysis/setFileName data/{phantom}-{setup}/PhaseSpace/PhaseSpace{angle}.root
+
+/control/strdoif {phantom}-{setup} == ctp528-ideal /control/alias n_protons 81000
+/control/strdoif {phantom}-{setup} == ctp528-realistic /control/alias n_protons 91000
+
+/control/strdoif {phantom}-{setup} == gammex-ideal /control/alias n_protons 183000
+/control/strdoif {phantom}-{setup} == gammex-realistic /control/alias n_protons 207000
+
+/control/strdoif {phantom}-{setup} == spiral-ideal /control/alias n_protons 83000
+/control/strdoif {phantom}-{setup} == spiral-realistic /control/alias n_protons 93000
+
+/control/divide n_protons_multiplier {angular_step_size} 0.5
+/control/shell echo "/run/beamOn $(echo '{n_protons_multiplier} * {n_protons}' | bc -l)" \
+    >runBeamOn_{phantom}_{setup}.mac
+
+/control/execute runBeamOn_{phantom}_{setup}.mac
+
+/control/execute dump_scores.mac

@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: protonct-sim
+version: 1.0.0
+date-released: 2026-10-21
+license: BSD-3-Clause
+repository-code: https://github.com/mhentz/protonct-sim
+authors:
+  - family-names: Hentz
+    given-names: Matthieu
+    orcid: https://orcid.org/0000-0002-0609-7048
+    affiliation: University College London
+preferred-citation:
+  type: thesis
+  thesis-type: PhD thesis
+  title: Iterative Reconstruction using Structural Priors in Proton Computed Tomography
+  year: 2026
+  institution:
+    name: University College London
+  authors:
+    - family-names: Hentz
+      given-names: Matthieu
+      orcid: https://orcid.org/0000-0002-0609-7048

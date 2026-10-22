@@ -1,0 +1,62 @@
+#!/bin/bash -l
+# SPDX-License-Identifier: BSD-3-Clause
+# Copyright (c) 2026 Matthieu Hentz
+#
+# Job script for Sun Grid Engine-style clusters, used to run several projection batches
+# in parallel. Submitted by the submit/resubmit scripts, which pass the variables listed
+# below with `qsub -v`.
+
+# WORKDIR
+# PHANTOM
+# SETUP
+# START
+# STOP
+# STEP_SIZE
+#$ -j y
+#$ -pe smp 8
+#$ -l mem=2G
+#$ -l h_rt=03:00:00
+#$ -cwd
+
+# Site-specific environment: adapt the modules to your cluster and set GEANT4_INSTALL
+# to the Geant4 installation prefix (passed on by the submission script)
+module purge
+module load gcc-libs/10.2.0
+source "${GEANT4_INSTALL:?GEANT4_INSTALL is not set}/bin/geant4.sh"
+
+echo "Working directory: ${WORKDIR}"
+echo "Phantom: ${PHANTOM}"
+echo "Setup: ${SETUP}"
+echo "Start at ID: ${START}"
+echo "Stop at  ID: ${STOP}"
+echo "Angle step size: ${STEP_SIZE}"
+echo ""
+
+cd ${WORKDIR}
+
+OUTPUT_DIR=data/${PHANTOM}-${SETUP}
+mkdir -p ${OUTPUT_DIR}/{PhaseSpace,scoring,logs}
+mkdir -p ${OUTPUT_DIR}/logs/{output,pct}
+
+cat macros/sim_template.mac |
+  sed -e "s/\${PHANTOM}/${PHANTOM}/g" \
+    -e "s/\${SETUP}/${SETUP}/g" \
+    -e "s/\${START}/${START}/g" \
+    -e "s/\${STOP}/${STOP}/g" \
+    -e "s/\${STEP_SIZE}/${STEP_SIZE}/g" \
+    >sim_${PHANTOM:0:1}${SETUP:0:1}_${START}.mac
+
+cp -r macros scripts ${OUTPUT_DIR}/logs
+
+echo "Start time $(date "+%Y%m%d %H:%M:%S")"
+
+OUTPUT_LOG=${OUTPUT_DIR}/logs/output/output_${PHANTOM:0:1}${SETUP:0:1}_${START}.log
+/usr/bin/time --verbose ./protonct-sim sim_${PHANTOM:0:1}${SETUP:0:1}_${START}.mac >${OUTPUT_LOG}
+
+if [[ ${START} == "0" ]]; then
+  mv sim_${PHANTOM:0:1}${SETUP:0:1}_0.mac ${OUTPUT_DIR}/logs
+else
+  rm sim_${PHANTOM:0:1}${SETUP:0:1}_${START}.mac
+fi
+
+echo "End time $(date "+%Y%m%d %H:%M:%S")"

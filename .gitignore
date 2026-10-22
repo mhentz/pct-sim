@@ -1,0 +1,5 @@
+build*
+source/.idea
+source/cmake-build-debug
+.vscode/
+RELEASE_PLAN.md
