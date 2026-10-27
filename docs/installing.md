@@ -41,15 +41,15 @@ environment with
 
 Clone the repository, create a build directory, configure with CMake and build:
 
-    git clone https://github.com/mhentz/protonct-sim.git
-    cd protonct-sim
+    git clone https://github.com/mhentz/pct-sim.git
+    cd pct-sim
     mkdir build
     cd build
     cmake ../source
     make -j8
 
 CMake finds Geant4 through the environment set up by `geant4.sh`. The executable
-`protonct-sim` is placed in the build directory together with copies of the
+`pct-sim` is placed in the build directory together with copies of the
 `macros/` and `scripts/` directories.
 
 ## Running on a cluster

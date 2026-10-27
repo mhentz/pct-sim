@@ -51,7 +51,7 @@ cp -r macros scripts ${OUTPUT_DIR}/logs
 echo "Start time $(date "+%Y%m%d %H:%M:%S")"
 
 OUTPUT_LOG=${OUTPUT_DIR}/logs/output/output_${PHANTOM:0:1}${SETUP:0:1}_${START}.log
-/usr/bin/time --verbose ./protonct-sim sim_${PHANTOM:0:1}${SETUP:0:1}_${START}.mac >${OUTPUT_LOG}
+/usr/bin/time --verbose ./pct-sim sim_${PHANTOM:0:1}${SETUP:0:1}_${START}.mac >${OUTPUT_LOG}
 
 if [[ ${START} == "0" ]]; then
   mv sim_${PHANTOM:0:1}${SETUP:0:1}_0.mac ${OUTPUT_DIR}/logs

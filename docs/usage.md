@@ -7,7 +7,7 @@ and the macros expect to be run from there.
 ## Interactive mode
 
 ```
-./protonct-sim
+./pct-sim
 ```
 
 starts a Qt (or terminal) session and executes `macros/debug/ui_vis.mac`, which builds
@@ -18,7 +18,7 @@ different phantom.
 ## Batch mode
 
 ```
-./protonct-sim my_acquisition.mac
+./pct-sim my_acquisition.mac
 ```
 
 executes the given macro. A minimal macro for a full 360° acquisition of the Gammex
@@ -79,11 +79,11 @@ will most likely need adapting.
 
 Before submitting, set `GEANT4_INSTALL` to the Geant4 installation prefix (the
 directory containing `bin/geant4.sh`) and, optionally, `WORKDIR` to the build
-directory that holds `protonct-sim`, `macros/` and `scripts/`:
+directory that holds `pct-sim`, `macros/` and `scripts/`:
 
 ```
 export GEANT4_INSTALL=/path/to/geant4
-export WORKDIR=/path/to/protonct-sim/build
+export WORKDIR=/path/to/pct-sim/build
 ./scripts/submit_simulation.sh gi 0.5
 ```
 
@@ -103,6 +103,6 @@ working directory.
 | `total_slice_dose.sh <dir>` | Sum the slice dose over all projections in a scoring directory. |
 
 If `WORKDIR` is not set, all four scripts default to
-`~/simulations/protonct-sim/build-<sim>`, i.e. one build directory per phantom and
+`~/simulations/pct-sim/build-<sim>`, i.e. one build directory per phantom and
 set-up (for example `build-ci`), so that the data of the `ideal` and `realistic`
 acquisitions end up in separate directories.

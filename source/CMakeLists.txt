@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Matthieu Hentz
 
 cmake_minimum_required(VERSION 3.16...3.27)
-project(protonct-sim LANGUAGES CXX)
+project(pct-sim LANGUAGES CXX)
 
 # Build with the Geant4 UI and visualisation drivers unless WITH_GEANT4_UIVIS=OFF,
 # which gives a batch-only executable
@@ -16,7 +16,7 @@ endif()
 
 include(${Geant4_USE_FILE})
 
-add_executable(protonct-sim
+add_executable(pct-sim
   main.cc
   src/ActionInitialization.cc
   src/Analysis.cc
@@ -33,8 +33,8 @@ add_executable(protonct-sim
   src/SensitiveDetector.cc
   src/SteppingAction.cc
 )
-target_include_directories(protonct-sim PRIVATE ${PROJECT_SOURCE_DIR}/include)
-target_link_libraries(protonct-sim PRIVATE ${Geant4_LIBRARIES})
+target_include_directories(pct-sim PRIVATE ${PROJECT_SOURCE_DIR}/include)
+target_link_libraries(pct-sim PRIVATE ${Geant4_LIBRARIES})
 
 # Copy macros and job scripts next to the executable
 foreach(_dir macros scripts)

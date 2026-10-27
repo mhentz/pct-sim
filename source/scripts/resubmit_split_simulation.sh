@@ -86,7 +86,7 @@ esac
 
 LAST_PROJECTION=359
 : "${GEANT4_INSTALL:?Set GEANT4_INSTALL to your Geant4 installation prefix}"
-WORKDIR="${WORKDIR:-${HOME}/simulations/protonct-sim/build-${SIM}}"
+WORKDIR="${WORKDIR:-${HOME}/simulations/pct-sim/build-${SIM}}"
 
 BATCH_STEP=$((STEP_SIZE * BATCH_SIZE))
 

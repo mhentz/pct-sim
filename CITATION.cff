@@ -1,11 +1,11 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 type: software
-title: protonct-sim
+title: pct-sim
 version: 1.0.0
 date-released: 2026-10-21
 license: BSD-3-Clause
-repository-code: https://github.com/mhentz/protonct-sim
+repository-code: https://github.com/mhentz/pct-sim
 authors:
   - family-names: Hentz
     given-names: Matthieu

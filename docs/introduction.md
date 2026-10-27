@@ -1,6 +1,6 @@
 # Introduction
 
-The `protonct` application, built using [Geant4](https://geant4.web.cern.ch), simulates the passage of protons
+The `pct-sim` application, built using [Geant4](https://geant4.web.cern.ch), simulates the passage of protons
 through a range of user-defined phantoms and records their energy, lateral
 position, and direction of travel at a specified position. The output of these
 simulations can then be used to produce images using different reconstruction

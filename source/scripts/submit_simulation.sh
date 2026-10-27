@@ -65,7 +65,7 @@ esac
 
 LAST_PROJECTION=359
 : "${GEANT4_INSTALL:?Set GEANT4_INSTALL to your Geant4 installation prefix}"
-WORKDIR="${WORKDIR:-${HOME}/simulations/protonct-sim/build-${SIM}}"
+WORKDIR="${WORKDIR:-${HOME}/simulations/pct-sim/build-${SIM}}"
 
 if [ "${STEP_SIZE}" -gt 2 ]; then
   GROUP=${STEP_SIZE}
