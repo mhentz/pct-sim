@@ -35,12 +35,21 @@ $ ./pct-sim
 
 To run it in batch mode, pass a macro instead, for example `./pct-sim my_acquisition.mac`; see [docs/usage.md](docs/usage.md).
 
+## Programs
+
+| Program | Built from | Purpose |
+| --- | --- | --- |
+| `pct-sim` | `source/` | The simulation itself: runs an acquisition interactively or from a macro. |
+| `rsp` | `source/tools/rsp/` (separate CMake project) | Prints the relative stopping power of each material for given proton energies; see [Relative stopping powers](docs/phantoms.md#relative-stopping-powers). |
+
 ## Documentation
 
 - [Introduction](docs/introduction.md): background on proton CT
 - [Installation](docs/installing.md)
 - [How the simulation works](docs/architecture.md)
 - [Phantoms](docs/phantoms.md)
+  - [Relative stopping powers](docs/phantoms.md#relative-stopping-powers): the `tools/rsp`
+    program that computes the RSP of each material
 - [Running the simulation](docs/usage.md): macros, commands and batch jobs
 - [Output](docs/output.md): ROOT ntuples and scoring files
 

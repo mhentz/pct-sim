@@ -80,7 +80,7 @@ several jobs.
 
 | Class | Role |
 | --- | --- |
-| `DetectorConstruction` | Defines the materials, builds the world and detectors, and calls `Phantom`; attaches the sensitive detectors. |
+| `DetectorConstruction` | Builds the world and detectors from the materials of `BuildMaterials()` (`Materials.cc`), and calls `Phantom`; attaches the sensitive detectors. |
 | `Phantom` | Builds the selected phantom at the requested angle. |
 | `DetectorConstructionMessenger`, `PhantomMessenger` | UI commands for the detector size and the phantom (`/user/det/`, `/phantom/`). |
 | `ActionInitialization` | Creates the user actions for the master and worker threads. |

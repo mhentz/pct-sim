@@ -42,7 +42,7 @@ and LN-450 (lung), AP6 (adipose), BR12 (breast), CT solid water (a solid resin w
 equivalent), SR2 (brain), LV1 (liver), IB3 (inner bone), B200 (porous bone with a mineral
 density of 200 mg/cm³), CB2-30 % and CB2-50 % (CB2 resin with 30 % and 50 % calcium
 carbonate) and SB3 (cortical bone). Their elemental compositions and densities, defined
-in `DetectorConstruction::DefineMaterials()`, are taken from Table 1 of G. Landry et al.,
+in `BuildMaterials()` (`src/Materials.cc`), are taken from Table 1 of G. Landry et al.,
 "Deriving effective atomic numbers from DECT based on a parameterization of the ratio
 of high and low linear attenuation coefficients", *Phys. Med. Biol.* 58, 6851 (2013),
 and are tabulated in M. Hentz, *Iterative Reconstruction using Structural Priors in
@@ -61,6 +61,24 @@ studying how spatial resolution changes with depth.
 Homogeneous water cylinders, 100 mm long for `water` and `water-large`, and 10.2 mm
 long for `toy`. They may be useful for checking the energy loss and scattering
 models, or for quick tests of the full chain.
+
+## Relative stopping powers
+
+`tools/rsp` prints the relative stopping power (RSP) of each material for protons: the
+electronic stopping power from `G4BetheBlochModel` divided by that of water. It is a
+separate CMake project, built against Geant4 10.7 or later:
+
+    mkdir build-rsp
+    cd build-rsp
+    cmake ../source/tools/rsp
+    make
+    ./rsp 200 250
+
+The arguments are proton energies in MeV (200 and 250 MeV by default). The RSP ground
+truths used in [pct-recon](https://github.com/mhentz/pct-recon) were generated with
+Geant4 10.7.4. Newer versions give slightly different values, because Geant4 11.0 and
+later normalise the mass fractions of each material to sum to one, which 10.7.4 did not
+enforce.
 
 ## References
 

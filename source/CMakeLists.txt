@@ -25,6 +25,7 @@ add_executable(pct-sim
   src/DetectorHit.cc
   src/EventAction.cc
   src/EventActionMessenger.cc
+  src/Materials.cc
   src/Phantom.cc
   src/PhantomMessenger.cc
   src/PrimaryGeneratorAction.cc

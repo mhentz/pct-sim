@@ -33,8 +33,6 @@ public:
   G4double GetDetDistance() const { return fDetDistance; }
 
 private:
-  void DefineMaterials();
-
   DetectorConstructionMessenger *fDetectorConstructionMessenger = nullptr;
   PhantomMessenger *fPhantomMessenger = nullptr;
 
